@@ -21,7 +21,7 @@ import com.dxctraining.inventorymgt.supplier.services.ISupplierService;
 
 @Controller
 public class SupplierController {
-	
+
 	@Autowired
 	private IComputerService computerService;
 
@@ -34,63 +34,77 @@ public class SupplierController {
 	@Autowired
 	private ISupplierService supplierService;
 
+	@PostConstruct
+	public void init() {
 
-    @PostConstruct
-    public void init(){
-    
-    			System.out.println("******SPrint 1 is working");
+		System.out.println("******SPrint 1 is working");
+		Supplier supplier1 = new Supplier("mohan");
+		supplier1 = supplierService.add(supplier1);
+		Item item1 = new Item("iphone", supplier1);
+		item1 = itemService.addItem(item1);
 
-    			Item item1 = new Item(11, "iphone");
-    			item1 = itemService.addItem(item1);
-    			Supplier supplier1 = new Supplier("mohan", item1);
-    			supplier1 = supplierService.add(supplier1);
+		Supplier supplier2 = new Supplier("sohan");
+		supplier2 = supplierService.add(supplier2);
+		Item item2 = new Item("samsung", supplier2);
+		item2 = itemService.addItem(item2);
 
-    			Item item2 = new Item(22, "samsung");
-    			item2 = itemService.addItem(item2);
-    			Supplier supplier2 = new Supplier("sohan", item2);
-    			supplier2 = supplierService.add(supplier2);
+		Supplier supplier3 = new Supplier("Rohan");
+		supplier3 = supplierService.add(supplier3);
+		Item item3 = new Item("oneplus", supplier3);
+		item3 = itemService.addItem(item3);
 
-    			Item item3 = new Item(33, "oneplus");
-    			item3 = itemService.addItem(item3);
-    			Supplier supplier3 = new Supplier("Rohan", item3);
-    			supplier3 = supplierService.add(supplier3);
+		System.out.println("******Sprint 2 is working");
 
-    			System.out.println("******Sprint 2 is working");
+		Phone phone1 = new Phone("IPhone7+", supplier1, 101);
+		phone1 = (Phone) itemService.addItem(phone1);
 
-    			Phone phone1 = new Phone(101, "IPhone7+", 64);
-    			phone1 = phoneService.add(phone1);
-    			Phone phone2 = new Phone(202, "OnePlusNord", 128);
-    			phone2 = phoneService.add(phone2);
+		Phone phone2 = new Phone("OnePlusNord", supplier2, 103);
+		phone2 = (Phone) itemService.addItem(phone2);
 
-    			System.out.println("******Sprint 3 is working");
+		System.out.println("******Sprint 3 is working");
 
-    			Computer computer1 = new Computer(1011, "HP", "512GB");
-    			computer1 = computerService.addComputer(computer1);
-    			Computer computer2 = new Computer(1012, "LG", "1TB");
-    			computer2 = computerService.addComputer(computer2);
+		Computer computer1 = new Computer("HP", supplier3, "512GB");
+		computer1 = (Computer) itemService.addItem(computer1);
+		Computer computer2 = new Computer("LG", supplier2, "1TB");
+		computer2 = (Computer) itemService.addItem(computer2);
 
-    			System.out.println("******Sprint 4 is working");
+		System.out.println("******Sprint 4 is working");
 
-    		}
-    
-    	@GetMapping("/profile")
-        public ModelAndView employeeDetails(@RequestParam("id")int id){
-    		Supplier sup = supplierService.findSupplierById(id);
-    	    ModelAndView modelAndView=new ModelAndView("details","supplier",sup);
-    	    return modelAndView;
-    	}
-    	
-    	@GetMapping("/listall")
-    	public ModelAndView all(){
-    		List<Supplier> values = supplierService.allSuppliers();
-    		ModelAndView modelAndView = new ModelAndView("list","suppliers",values);
-    		return modelAndView;
-    		
-    	}
-    	@GetMapping("/logout")
-    	public ModelAndView logout(){
-    		ModelAndView modelAndView = new ModelAndView("login");
-    		return modelAndView;
-    	}
-    }
-	
+	}
+
+	/*
+	 * @GetMapping("/profile") public ModelAndView
+	 * supplierDetails(@RequestParam("id")int id){ Supplier sup =
+	 * supplierService.findSupplierById(id); ModelAndView modelAndView=new
+	 * ModelAndView("details","supplier",sup); return modelAndView; }
+	 */
+	@GetMapping("/phoneslist")
+	public ModelAndView allPhones() {
+		List<Phone> values = phoneService.allPhones();
+		ModelAndView modelAndView = new ModelAndView("phonelist", "phones", values);
+		return modelAndView;
+	}
+
+	@GetMapping("/computerslist")
+	public ModelAndView allComputers() {
+		List<Computer> values = computerService.allComputers();
+		ModelAndView modelAndView = new ModelAndView("computerlist", "computers", values);
+		return modelAndView;
+	}
+
+	@GetMapping("/itemslist")
+	public ModelAndView allItems() {
+		List<Item> values = itemService.allItems();
+		ModelAndView modelAndView = new ModelAndView("itemlist", "items", values);
+		return modelAndView;
+	}
+
+	@GetMapping("/supplierslist")
+	public ModelAndView allSupliers() {
+		List<Supplier> values = supplierService.allSuppliers();
+		ModelAndView modelAndView = new ModelAndView("supplierlist", "suppliers", values);
+		return modelAndView;
+
+	}
+
+}

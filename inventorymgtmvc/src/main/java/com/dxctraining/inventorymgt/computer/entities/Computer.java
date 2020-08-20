@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.dxctraining.inventorymgt.item.entities.Item;
+import com.dxctraining.inventorymgt.supplier.entities.Supplier;
 
 @Entity
 @Table(name = "computers")
@@ -11,8 +12,10 @@ public class Computer extends Item {
 
 	private String diskSize;
 
-	public Computer(int id, String name, String diskSize) {
-		super(id, name);
+	public Computer() {}
+	
+	public Computer(String name,Supplier supplier, String diskSize) {
+		super( name,supplier);
 		this.diskSize = diskSize;
 	}
 

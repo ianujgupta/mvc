@@ -17,10 +17,6 @@
 Supplier Id is <c:out value="${supplier.id}"  /><br>
 Supplier Name is <c:out value="${supplier.name}"  /><br>
 
-Supplier Item Id is<c:out value="${supplier.item.id}"  /><br>
-Supplier Item Name is <c:out value="${supplier.item.name}"  /><br>
-
-
 <br>
 </c:forEach>
 
