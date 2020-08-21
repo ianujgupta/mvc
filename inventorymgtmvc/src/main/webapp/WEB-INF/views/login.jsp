@@ -12,7 +12,7 @@
 
 <h1>Login Page</h1>
 
-<form method="get" action="/login">
+<form method="get" action="/processlogin">
 
 <div>
 
@@ -20,15 +20,14 @@
 <input type="number"  name="id">
 
 </div>
-<!-- 
+
 <div>
 
 <label>Password</label>
 <input type="password"  name="password">
 
 </div>
- -->
-<input type="submit" value="Create">
+<input type="submit" value="Login">
 
 </form>
 

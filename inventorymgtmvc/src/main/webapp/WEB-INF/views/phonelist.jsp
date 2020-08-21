@@ -14,15 +14,18 @@
 
 
 	<c:forEach items="${phones}" var="phone">
+	
+	ID is	<c:out value="${phone.id}" /><br>
 
-		<c:out value="${phone.name}" />
+	Name is	<c:out value="${phone.name}" /><br>
 
-		<c:out value="${phone.id}" />
-
-		<c:out value="${phone.storageSize}" />
+		
+	Storage Size is	<c:out value="${phone.storageSize}" />
 		<br>
 
 	</c:forEach>
+	
+	<a href="/logout"> Log out </a>
 
 </body>
 </html>

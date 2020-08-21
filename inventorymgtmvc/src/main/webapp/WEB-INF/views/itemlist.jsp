@@ -19,6 +19,6 @@ Item Name is <c:out value="${item.name}"  /><br>
 
 <br>
 </c:forEach>
-
+	<a href="/logout"> Log out </a>
 </body>
 </html>

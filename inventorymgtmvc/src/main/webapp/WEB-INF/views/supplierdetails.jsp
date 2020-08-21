@@ -11,11 +11,13 @@
 <body>
 
 <h1>Supplier Details </h1>
+
 id is <c:out value="${supplier.id}"  />
 <br>
 name is <c:out value="${supplier.name}"  />
-
 <br>
-<a href="/logout"> Log out </a>
+
+<button><a href="/logout"> Log out </a></button>
+
 </body>
 </html>

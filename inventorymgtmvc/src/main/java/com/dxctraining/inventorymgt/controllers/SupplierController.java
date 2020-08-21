@@ -16,6 +16,7 @@ import com.dxctraining.inventorymgt.item.entities.Item;
 import com.dxctraining.inventorymgt.item.services.IItemService;
 import com.dxctraining.inventorymgt.phone.entities.Phone;
 import com.dxctraining.inventorymgt.phone.services.IPhoneService;
+import com.dxctraining.inventorymgt.supplier.dto.SessionData;
 import com.dxctraining.inventorymgt.supplier.entities.Supplier;
 import com.dxctraining.inventorymgt.supplier.services.ISupplierService;
 
@@ -34,21 +35,24 @@ public class SupplierController {
 	@Autowired
 	private ISupplierService supplierService;
 
+	@Autowired
+	private SessionData sessionData;
+
 	@PostConstruct
 	public void init() {
 
 		System.out.println("******SPrint 1 is working");
-		Supplier supplier1 = new Supplier("mohan");
+		Supplier supplier1 = new Supplier("mohan", "11111");
 		supplier1 = supplierService.add(supplier1);
 		Item item1 = new Item("iphone", supplier1);
 		item1 = itemService.addItem(item1);
 
-		Supplier supplier2 = new Supplier("sohan");
+		Supplier supplier2 = new Supplier("sohan", "22222");
 		supplier2 = supplierService.add(supplier2);
 		Item item2 = new Item("samsung", supplier2);
 		item2 = itemService.addItem(item2);
 
-		Supplier supplier3 = new Supplier("Rohan");
+		Supplier supplier3 = new Supplier("Rohan", "33333");
 		supplier3 = supplierService.add(supplier3);
 		Item item3 = new Item("oneplus", supplier3);
 		item3 = itemService.addItem(item3);
@@ -105,6 +109,54 @@ public class SupplierController {
 		ModelAndView modelAndView = new ModelAndView("supplierlist", "suppliers", values);
 		return modelAndView;
 
+	}
+	
+	@GetMapping("/supplier")
+	public ModelAndView supplierDetails(@RequestParam("id") int id) {
+		Supplier supplier = supplierService.findSupplierById(id);
+		ModelAndView modelAndView = new ModelAndView("supplierdetails", "supplier", supplier);
+		return modelAndView;
+	}
+
+	@GetMapping("/register")
+	public ModelAndView registerSupplier() {
+		ModelAndView mv = new ModelAndView("register");
+		return mv;
+	}
+
+	@GetMapping("/processregister")
+	public ModelAndView processRegister(@RequestParam("name") String name, @RequestParam("password") String password) {
+		System.out.println("inside processregister method, name=" + name);
+		Supplier supplier = new Supplier(name, password);
+		supplier = supplierService.add(supplier);
+		ModelAndView mv = new ModelAndView("supplierdetails", "supplier", supplier);
+		return mv;
+	}
+//error
+	@GetMapping("/processlogin")
+	public ModelAndView processLogin(@RequestParam("id") int id, @RequestParam("password") String password) {
+		boolean correct = supplierService.authenticate(id, password);
+		if (!correct) {
+			ModelAndView modelAndView = new ModelAndView("login");
+			return modelAndView;
+		}
+		sessionData.saveLogin(id);
+		Supplier supplier = supplierService.findSupplierById(id);
+		ModelAndView mv = new ModelAndView("details", "supplier", supplier);
+		return mv;
+	}
+
+	@GetMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("login");
+		return mv;
+	}
+
+	@GetMapping("/logout")
+	public ModelAndView logout() {
+		sessionData.clear();
+		ModelAndView mv = new ModelAndView("login");
+		return mv;
 	}
 
 }

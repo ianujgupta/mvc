@@ -13,12 +13,16 @@ public class Supplier {
 	@GeneratedValue
 	private int id;
 	private String name;
+	private String password;
 
-	public Supplier() {
-	}
 
-	public Supplier(String name) {
+
+
+	public Supplier() {}
+
+	public Supplier(String name,String password) {
 		this.name = name;
+		this.password=password;
 	}
 
 	public int getId() {
@@ -40,6 +44,13 @@ public class Supplier {
 	@Override
 	public int hashCode() {
 		return id;
+	}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
