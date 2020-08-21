@@ -9,14 +9,23 @@ import com.dxctraining.inventorymgt.supplier.entities.Supplier;
 @Entity
 @Table(name = "computers")
 public class Computer extends Item {
-
+	private String name;
 	private String diskSize;
 
-	public Computer() {}
-	
-	public Computer(String name,Supplier supplier, String diskSize) {
-		super( name,supplier);
+	public Computer() {
+	}
+
+	public Computer(String name, String diskSize) {
+		this.name = name;
 		this.diskSize = diskSize;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDiskSize() {

@@ -53,5 +53,16 @@ public class Item {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj==null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Item that = (Item) obj;
+		return this.id == that.id;
+	}
 
 }

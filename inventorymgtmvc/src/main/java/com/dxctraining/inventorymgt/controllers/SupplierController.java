@@ -59,29 +59,39 @@ public class SupplierController {
 
 		System.out.println("******Sprint 2 is working");
 
-		Phone phone1 = new Phone("IPhone7+", supplier1, 101);
-		phone1 = (Phone) itemService.addItem(phone1);
-
-		Phone phone2 = new Phone("OnePlusNord", supplier2, 103);
-		phone2 = (Phone) itemService.addItem(phone2);
-
-		System.out.println("******Sprint 3 is working");
-
-		Computer computer1 = new Computer("HP", supplier3, "512GB");
-		computer1 = (Computer) itemService.addItem(computer1);
-		Computer computer2 = new Computer("LG", supplier2, "1TB");
-		computer2 = (Computer) itemService.addItem(computer2);
-
-		System.out.println("******Sprint 4 is working");
+//		Phone phone1 = new Phone("IPhone7+", supplier1, 101);
+//		phone1 = (Phone) itemService.addItem(phone1);
+//
+//		Phone phone2 = new Phone("OnePlusNord", supplier2, 103);
+//		phone2 = (Phone) itemService.addItem(phone2);
+//
+//		System.out.println("******Sprint 3 is working");
+//
+//		Computer computer1 = new Computer("HP", supplier3, "512GB");
+//		computer1 = (Computer) itemService.addItem(computer1);
+//		Computer computer2 = new Computer("LG", supplier2, "1TB");
+//		computer2 = (Computer) itemService.addItem(computer2);
+//
+//		System.out.println("******Sprint 4 is working");
 
 	}
-
+/*
+	@GetMapping("/phoneregister")
+	public ModelAndView addPhones() {
+		ModelAndView modelAndView = new ModelAndView("registerphone");
+		return modelAndView;
+	}
+	
+	@GetMapping("/addedphones")
+	public ModelAndView phoneRegister(@RequestParam("name") String name, @RequestParam("supplier") Supplier supplier,@RequestParam("storagesize") int storagesize) {
+		System.out.println("inside phone register method, name=" + name);
+		Phone phone = new Phone(name, supplier,storagesize);
+		List <Phone> values = (List<Phone>) itemService.addItem(phone);
+		ModelAndView mv = new ModelAndView("addPhones", "phone", values);
+		return mv;
+	}
+*/
 	/*
-	 * @GetMapping("/profile") public ModelAndView
-	 * supplierDetails(@RequestParam("id")int id){ Supplier sup =
-	 * supplierService.findSupplierById(id); ModelAndView modelAndView=new
-	 * ModelAndView("details","supplier",sup); return modelAndView; }
-	 */
 	@GetMapping("/phoneslist")
 	public ModelAndView allPhones() {
 		List<Phone> values = phoneService.allPhones();
@@ -102,7 +112,7 @@ public class SupplierController {
 		ModelAndView modelAndView = new ModelAndView("itemlist", "items", values);
 		return modelAndView;
 	}
-
+*/
 	@GetMapping("/supplierslist")
 	public ModelAndView allSupliers() {
 		List<Supplier> values = supplierService.allSuppliers();
@@ -110,7 +120,7 @@ public class SupplierController {
 		return modelAndView;
 
 	}
-	
+
 	@GetMapping("/supplier")
 	public ModelAndView supplierDetails(@RequestParam("id") int id) {
 		Supplier supplier = supplierService.findSupplierById(id);
@@ -132,7 +142,7 @@ public class SupplierController {
 		ModelAndView mv = new ModelAndView("supplierdetails", "supplier", supplier);
 		return mv;
 	}
-//error
+
 	@GetMapping("/processlogin")
 	public ModelAndView processLogin(@RequestParam("id") int id, @RequestParam("password") String password) {
 		boolean correct = supplierService.authenticate(id, password);
